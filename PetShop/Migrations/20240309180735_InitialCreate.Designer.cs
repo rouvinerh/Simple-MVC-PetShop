@@ -12,7 +12,7 @@ using PetShop.Data;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20240304165858_InitialCreate")]
+    [Migration("20240309180735_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,11 +27,14 @@ namespace PetShop.Migrations
 
             modelBuilder.Entity("PetShop.Models.Animal", b =>
                 {
-                    b.Property<int>("Age")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Age"));
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Age")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("GetDate")
                         .HasColumnType("datetime2");
@@ -50,7 +53,7 @@ namespace PetShop.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Age");
+                    b.HasKey("Id");
 
                     b.ToTable("Animal");
                 });

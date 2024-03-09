@@ -4,7 +4,8 @@ namespace PetShop.Models
 {
     public class Animal
     {
-        [Key]
+        public int Id { get; set; }
+
         public int Age { get; set; }
 
         public string Species { get; set; }

@@ -15,8 +15,9 @@ namespace PetShop.Migrations
                 name: "Animal",
                 columns: table => new
                 {
-                    Age = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Age = table.Column<int>(type: "int", nullable: false),
                     Species = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GetDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SoldDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -25,7 +26,7 @@ namespace PetShop.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Animal", x => x.Age);
+                    table.PrimaryKey("PK_Animal", x => x.Id);
                 });
         }
 
