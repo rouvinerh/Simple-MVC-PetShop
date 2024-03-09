@@ -1,4 +1,4 @@
-﻿ using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -36,7 +36,7 @@ namespace PetShop.Controllers
             }
 
             var animal = await _context.Animal
-                .FirstOrDefaultAsync(m => m.Age == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
                 return NotFound();
@@ -56,7 +56,7 @@ namespace PetShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
+        public async Task<IActionResult> Create([Bind("Id,Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
         {
             if (ModelState.IsValid)
             {
@@ -88,9 +88,9 @@ namespace PetShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
         {
-            if (id != animal.Age)
+            if (id != animal.Id)
             {
                 return NotFound();
             }
@@ -104,7 +104,7 @@ namespace PetShop.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AnimalExists(animal.Age))
+                    if (!AnimalExists(animal.Id))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace PetShop.Controllers
             }
 
             var animal = await _context.Animal
-                .FirstOrDefaultAsync(m => m.Age == id);
+                .FirstOrDefaultAsync(m => m.Id == id);
             if (animal == null)
             {
                 return NotFound();
@@ -157,7 +157,7 @@ namespace PetShop.Controllers
 
         private bool AnimalExists(int id)
         {
-          return (_context.Animal?.Any(e => e.Age == id)).GetValueOrDefault();
+          return (_context.Animal?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }
