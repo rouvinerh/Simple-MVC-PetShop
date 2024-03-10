@@ -182,6 +182,11 @@ namespace PetShop.Models
                     {
                         Username = "admin",
                         Password = "7h15_15_mvc_p37_5h0p!"
+                    },
+                    new Users
+                    {
+                        Username = "user",
+                        Password = "normalpassword"
                     });
                 }
                 context.SaveChanges();

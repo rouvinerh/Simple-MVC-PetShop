@@ -7,7 +7,7 @@ using PetShop.Models;
 
 namespace PetShop.Controllers
 {
-    [Authorize]
+    [Authorize(Policy = "AdminOnly")]
     public class AdminController : Controller
     {
         private readonly PetShopContext _context;

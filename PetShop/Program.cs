@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using PetShop.Data;
 using PetShop.Models;
+using System.Security.Claims;
 namespace PetShop
 {
     public class Program
@@ -15,8 +16,18 @@ namespace PetShop
             builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
                 {
-                    options.LoginPath = "/Account/Login"; // Adjust this path to your login page
+                    options.LoginPath = "/Account/Login"; 
                 });
+
+            builder.Services.AddAuthorization(options =>
+            {
+                options.AddPolicy("AdminOnly", policy =>
+                {
+                    policy.RequireAuthenticatedUser();
+                    policy.RequireClaim(ClaimTypes.Name, "admin");
+                    // Add more requirements if needed
+                });
+            });
             // Add services to the container.
             builder.Services.AddAuthorization();
 
