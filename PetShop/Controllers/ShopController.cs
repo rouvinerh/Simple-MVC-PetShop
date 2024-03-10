@@ -14,7 +14,7 @@ namespace PetShop.Controllers
         {
             _context = context;
         }
-
+        // GET: Shop
         public async Task<IActionResult> Index(string searchString, string animalSpecies)
         {
             if (_context.Animal == null)

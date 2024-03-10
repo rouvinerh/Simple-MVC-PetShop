@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using PetShop.Data;
@@ -12,7 +13,15 @@ namespace PetShop
             builder.Services.AddDbContext<PetShopContext>(options =>
                  options.UseSqlServer(builder.Configuration.GetConnectionString("PetShopContext")));
 
+            builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options =>
+                {
+                    options.LoginPath = "/Account/Login"; // Adjust this path to your login page
+                    options.AccessDeniedPath = "/Account/AccessDenied"; // Adjust this path to your access denied page
+                });
             // Add services to the container.
+            builder.Services.AddAuthorization();
+
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
@@ -36,6 +45,7 @@ namespace PetShop
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.MapControllerRoute(
