@@ -6,16 +6,16 @@ using PetShop.Models;
 
 namespace PetShop.Controllers
 {
-    public class AnimalsController : Controller
+    public class AdminController : Controller
     {
         private readonly PetShopContext _context;
 
-        public AnimalsController(PetShopContext context)
+        public AdminController(PetShopContext context)
         {
             _context = context;
         }
 
-        // GET: Animals
+        // GET: Shop
         public async Task<IActionResult> Index(string searchString, string animalSpecies)
         {
             if (_context.Animal == null)
@@ -49,7 +49,7 @@ namespace PetShop.Controllers
             return View(animalSpeciesVM);
         }
 
-        // GET: Animals/Details/5
+        // GET: Shop/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Animal == null)
@@ -67,13 +67,13 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        // GET: Animals/Create
+        // GET: Shop/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Animals/Create
+        // POST: Shop/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -89,7 +89,7 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        // GET: Animals/Edit/5
+        // GET: Shop/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Animal == null)
@@ -105,7 +105,7 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        // POST: Animals/Edit/5
+        // POST: Shop/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -140,7 +140,7 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        // GET: Animals/Delete/5
+        // GET: Shop/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Animal == null)
@@ -158,7 +158,7 @@ namespace PetShop.Controllers
             return View(animal);
         }
 
-        // POST: Animals/Delete/5
+        // POST: Shop/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
