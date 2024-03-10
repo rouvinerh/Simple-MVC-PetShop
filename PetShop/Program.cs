@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using PetShop.Data;
 using PetShop.Models;
 namespace PetShop
@@ -17,7 +16,6 @@ namespace PetShop
                 .AddCookie(options =>
                 {
                     options.LoginPath = "/Account/Login"; // Adjust this path to your login page
-                    options.AccessDeniedPath = "/Account/AccessDenied"; // Adjust this path to your access denied page
                 });
             // Add services to the container.
             builder.Services.AddAuthorization();
