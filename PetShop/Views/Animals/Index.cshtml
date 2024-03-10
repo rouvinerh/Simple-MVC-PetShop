@@ -31,6 +31,9 @@
                 @Html.DisplayNameFor(model => model.Animals![0].Species)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Animals![0].Sex)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Animals![0].GetDate)
             </th>
             <th>
@@ -50,6 +53,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Species)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sex)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.GetDate)

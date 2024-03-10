@@ -11,6 +11,8 @@ namespace PetShop.Models
 
         public string Species { get; set; }
 
+        public string Sex { get; set; }
+
         [Display(Name = "Date Received")]
         [DataType(DataType.Date)]
         public DateTime GetDate { get; set; }
@@ -19,7 +21,5 @@ namespace PetShop.Models
 
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
-        
-
     }
 }

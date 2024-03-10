@@ -83,7 +83,7 @@ namespace PetShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
+        public async Task<IActionResult> Create([Bind("Id,Age,Species,Sex,GetDate,Name,Price")] Animal animal)
         {
             if (ModelState.IsValid)
             {
@@ -115,7 +115,7 @@ namespace PetShop.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Age,Species,GetDate,SoldDate,Name,Price")] Animal animal)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Age,Species,Sex,GetDate,Name,Price")] Animal animal)
         {
             if (id != animal.Id)
             {
