@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Operations;
 using PetShop.Data;
 using PetShop.Models;
 
@@ -20,11 +21,37 @@ namespace PetShop.Controllers
         }
 
         // GET: Animals
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchString, string animalSpecies)
         {
-              return _context.Animal != null ? 
-                          View(await _context.Animal.ToListAsync()) :
-                          Problem("Entity set 'PetShopContext.Animal'  is null.");
+            if (_context.Animal == null)
+            {
+                return Problem("Entity set 'PetShopContext.Animal' is null.");
+            }
+
+            IQueryable<string> specifesQuery = from m in _context.Animal
+                                            orderby m.Species
+                                            select m.Species;
+
+            var animals = from m in _context.Animal
+                         select m;
+
+            if (!String.IsNullOrEmpty(searchString))
+            { 
+                animals = animals.Where(s => s.Name!.Contains(searchString));
+            }
+
+            if (!string.IsNullOrEmpty(animalSpecies))
+            {
+                animals = animals.Where(x => x.Species == animalSpecies);
+            }
+
+            var animalSpeciesVM = new AnimalSpeciesViewModel
+            {
+                Species = new SelectList(await specifesQuery.Distinct().ToListAsync()),
+                Animals = await animals.ToListAsync()
+            };
+
+            return View(animalSpeciesVM);
         }
 
         // GET: Animals/Details/5

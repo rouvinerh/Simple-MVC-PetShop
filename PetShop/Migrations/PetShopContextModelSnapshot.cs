@@ -41,10 +41,7 @@ namespace PetShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("SoldDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Species")
                         .IsRequired()

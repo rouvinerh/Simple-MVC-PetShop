@@ -12,8 +12,8 @@ using PetShop.Data;
 namespace PetShop.Migrations
 {
     [DbContext(typeof(PetShopContext))]
-    [Migration("20240309180735_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20240310061510_Initial")]
+    partial class Initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,10 +44,7 @@ namespace PetShop.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime?>("SoldDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("decimal(18, 2)");
 
                     b.Property<string>("Species")
                         .IsRequired()
