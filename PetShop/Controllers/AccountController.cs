@@ -2,14 +2,24 @@
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using PetShop.Data;
 using PetShop.Models;
 using System.Security.Claims;
+
 
 namespace PetShop.Controllers
 {
     [Authorize]
     public class AccountController : Controller
     {
+        private readonly PetShopContext _context;
+
+        public AccountController(PetShopContext context)
+        {
+            _context = context;
+        }
+
         [AllowAnonymous]
         [HttpGet]
         public IActionResult Login()
@@ -20,16 +30,19 @@ namespace PetShop.Controllers
         [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model)
+        public async Task<IActionResult> Login(Users model)
         {
             if (ModelState.IsValid)
             {
-                // temp to ensure it works
-                if (IsValidUser(model.Username, model.Password))
+                var user = await _context.Users
+                    .FirstOrDefaultAsync(u => u.Username == model.Username && u.Password == model.Password);
+
+                if (user != null)
                 {
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, model.Username),
+                        // Add more claims as needed
                     };
 
                     var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
@@ -37,12 +50,11 @@ namespace PetShop.Controllers
 
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
 
-                    return RedirectToAction("Index", "Home"); 
+                    return RedirectToAction("Index", "Admin");
                 }
-
-                ModelState.AddModelError(string.Empty, "Invalid username or password");
             }
 
+            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
             return View(model);
         }
 
@@ -51,11 +63,6 @@ namespace PetShop.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
             return RedirectToAction("Index", "Home"); 
-        }
-
-        private bool IsValidUser(string username, string password)
-        {
-            return username == "demo" && password == "password";
         }
     }
 }

@@ -10,5 +10,7 @@ namespace PetShop.Data
         }
 
         public DbSet<PetShop.Models.Animal> Animal { get; set; } = default!;
+
+        public DbSet<PetShop.Models.Users> Users { get; set; } = default!;
     }
 }
