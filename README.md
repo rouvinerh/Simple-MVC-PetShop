@@ -1,6 +1,6 @@
-# Simple MVC Website
+# Simple MVC Petshop
 
-A basic Pet Shop project built using the MVC framework via ASP.NET 7.0.
+A basic web project built using the MVC framework and ASP.NET 7.0.
 
 Features include:
 * MSSQL backend database
