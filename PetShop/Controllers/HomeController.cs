@@ -18,7 +18,7 @@ namespace PetShop.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Disclaimer()
         {
             return View();
         }

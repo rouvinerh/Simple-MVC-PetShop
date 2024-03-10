@@ -1,8 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using PetShop.Data;
-using System;
-using System.Linq;
+
 
 namespace PetShop.Models
 {
