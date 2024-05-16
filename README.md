@@ -17,3 +17,6 @@ User: `user:normalpassword`
 
 ![](assets/README-image.png)
 
+## Known Bugs
+
+The database might fail for some reason. A user might have to run `Update-Database` in NuGet Package Manager after cloning to make it work properly.
